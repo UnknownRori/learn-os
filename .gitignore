@@ -1,0 +1,7 @@
+# ISO
+iso/boot/kernel.elf
+
+# Build system
+nob
+nob.old
+build/
