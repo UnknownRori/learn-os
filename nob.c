@@ -13,6 +13,7 @@ const char* KERNEL_MODULE_ASM[] = {
 };
 
 const char* KERNEL_MODULE_C[] = {
+    "kernel"
 };
 
 int build_bootloader();
@@ -59,7 +60,7 @@ int main(int argc, char** argv)
         const char* dst_obj = nob_temp_sprintf("%s/%s.o", BUILD_DIR, KERNEL_MODULE_C[i]);
         nob_da_append(&objs, dst_obj);
         if (nob_needs_rebuild(dst_obj, &src, 1)) {
-            nob_cmd_append(&cmd, "gcc", "-c", src);
+            nob_cmd_append(&cmd, "gcc", "-m32", "-ffreestanding", "-c", src);
             nob_cmd_append(&cmd, "-Wextra", "-Wall");
             nob_cmd_append(&cmd, "-o", dst_obj);
             if (!nob_cmd_run(&cmd, .async = &procs, .max_procs = 4)) return 1;
@@ -70,14 +71,16 @@ int main(int argc, char** argv)
 
     // Link it
     cmd.count = 0;
-    nob_cmd_append(&cmd, "ld", "-m", "elf_i386", "-T", "linker.ld", "-o", elf);
-    for (size_t i = 0; i < objs.count; i++) {
-        const char* obj = objs.items[i];
-        nob_cmd_append(&cmd, obj);
-    }
-    if (!nob_cmd_run(&cmd)) return 1;
+    if (nob_needs_rebuild(elf, objs.items, objs.count)) {
+        nob_cmd_append(&cmd, "ld", "-m", "elf_i386", "-T", "linker.ld", "-o", elf);
+        for (size_t i = 0; i < objs.count; i++) {
+            const char* obj = objs.items[i];
+            nob_cmd_append(&cmd, obj);
+        }
+        if (!nob_cmd_run(&cmd)) return 1;
 
-    if (!nob_copy_file(elf, "./iso/boot/kernel.elf")) return 1;
+        if (!nob_copy_file(elf, "./iso/boot/kernel.elf")) return 1;
+    }
 
     // Make ISO
     const char* iso = nob_temp_sprintf("%s/%s", BUILD_DIR, ISO);
