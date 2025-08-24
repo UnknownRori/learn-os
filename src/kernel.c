@@ -1,13 +1,14 @@
+#include "include/common.h"
+#include "include/vga.h"
+
 void kmain(void) {
-    volatile char* vga = (volatile char*)0xB8000;
-    const char* msg = "Hello from C!";
-    int i = 0;
+    const char* msg = "Loading Rori OS Project...";
+    vga_init();
+    vga_clear();
+    vga_setcolor(VGA_RED);
+    vga_put_str(msg, VGA_GREEN, 2, 2);
+    vga_put_str(msg, VGA_GREEN, 100, 100);
+    vga_put_str(msg, VGA_GREEN, 4, 4);
 
-    while (msg[i]) {
-        vga[i * 2] = msg[i];
-        vga[i * 2 + 1] = 0x0F;
-        i++;
-    }
-
-    for (;;); // hang
+    HALT;
 }

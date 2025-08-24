@@ -13,7 +13,8 @@ const char* KERNEL_MODULE_ASM[] = {
 };
 
 const char* KERNEL_MODULE_C[] = {
-    "kernel"
+    "kernel",
+    "vga",
 };
 
 int build_bootloader();
@@ -67,7 +68,7 @@ int main(int argc, char** argv)
         }
     }
 
-    // if (!nob_procs_wait(procs)) return 1;
+    if (!nob_procs_wait(procs)) return 1;
 
     // Link it
     cmd.count = 0;
