@@ -5,6 +5,7 @@
 #define RORI_OS_LOG_H
 
 #ifdef RORI_LOG
+#include "common.h"
 #include "tty.h"
 #include "serial.h"
 

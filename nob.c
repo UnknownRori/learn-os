@@ -10,6 +10,8 @@
 
 const char* KERNEL_MODULE_ASM[] = {
     "boot",
+    "stub_exception",
+    "stub_timer",
 };
 
 const char* KERNEL_MODULE_C[] = {
@@ -18,6 +20,8 @@ const char* KERNEL_MODULE_C[] = {
     "serial",
     "tty",
     "memory",
+    "idt",
+    "timer",
 };
 
 int build_bootloader();
@@ -99,7 +103,7 @@ int main(int argc, char** argv)
 
     cmd.count = 0;
     if (strcmp(run, "run") == 0) {
-        nob_cmd_append(&cmd, "qemu-system-i386", "-cdrom", iso, "-serial", "stdio");
+        nob_cmd_append(&cmd, "qemu-system-i386", "-cdrom", iso, "-serial", "stdio", "--no-reboot");
         if (!nob_cmd_run(&cmd)) return 1;
     }
     return 0;
