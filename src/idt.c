@@ -1,9 +1,9 @@
+#include <stdint.h>
+
 #include "include/idt.h"
 #include "include/common.h"
 #include "include/serial.h"
 #include "include/timer.h"
-#include <stdint.h>
-#include <sys/types.h>
 
 #define RORI_LOG
 #include "include/log.h"

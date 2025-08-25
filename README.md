@@ -18,6 +18,10 @@ The development split into 2 platform: windows and linux, but first clone the re
 
 ```sh
 git clone https://github.com/UnknownRori/learn-os
+cd learn-os
+
+# Shallow clone the submodule
+git submodule update --depth 1
 ```
 
 ### Linux
@@ -40,6 +44,9 @@ Same as linux but since windows is not natively support I use docker to allow li
 docker build -t learn-os-dev
 
 docker run --rm -v "$(pwd -W):/src" learn-os-dev sh -c "gcc nob.c -o nob && ./nob"
+
+# Run the ISO image
+qemu-system-i386 -cdrom ./build/rori_i386.iso -serial stdio --no-reboot
 ```
 
 ## License

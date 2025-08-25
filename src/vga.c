@@ -1,7 +1,8 @@
-#include "include/vga.h"
 #include <stdint.h>
-#include <string.h>
+
+#include "include/vga.h"
 #include "include/assert.h"
+#include "include/memory.h"
 
 static uint8_t color;
 static volatile VGAEntry* buffer = NULL;
