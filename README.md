@@ -2,7 +2,7 @@
 
 This repository is storing the result of OS development stuff, it might not efficient, cool but atleast it work
 
-> ![IMPORTANT]
+> [!WARNING]
 > Don't Expect that this is good stuff, but it can become good reference point
 > Although sometimes I didn't put resources.
 
