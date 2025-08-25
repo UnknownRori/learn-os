@@ -51,6 +51,15 @@ void tty_putchar(char c)
 {
     if (c == '\n') {
         new_line();
+    } else if (c == '\b') {
+        uint8_t color = vga_entry_color(fg, bg);
+
+        x -= 1;
+        buffer[VGA_HEIGHT - 1][x] = (VGAEntry) {
+            .ch = ' ',
+            .color = color,
+        };
+
     } else {
         uint8_t color = vga_entry_color(fg, bg);
 
