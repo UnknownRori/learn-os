@@ -3,7 +3,7 @@
 #define NOB_IMPLEMENTATION
 #include "nob.h/nob.h"
 
-#define ISO         "rori_x86.iso"
+#define ISO         "rori_i386.iso"
 
 #define SRC_DIR     "./src"
 #define BUILD_DIR   "./build"
