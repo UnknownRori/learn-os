@@ -3,18 +3,22 @@
 #include "include/tty.h"
 #include "include/vga.h"
 
+#define RORI_LOG
+#include "include/log.h"
+
 void kmain(void) {
     serial_init();
-    serial_writeln("[+] Serial initialized");
+    LOG("[+] Serial initialized");
+
     vga_init();
     vga_clear();
+    LOG("[+] VGA Initialized");
 
-    vga_put_str("[+] VGA Initialized", vga_entry_color(VGA_WHITE, VGA_BLACK), 0, 0);
     tty_init();
+    LOG("[+] tty Initialized");
 
-    serial_writeln("[+] Booting...");
-    tty_writeln("[+] Booting...");
-    tty_writeln("[+] Loading Rori OS Project...");
+    LOG("[+] Booting");
+    LOG("[+] Loading Rori OS Project...");
 
     HALT;
 }

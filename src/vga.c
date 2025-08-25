@@ -3,7 +3,7 @@
 #include "include/assert.h"
 
 static uint8_t color;
-static volatile VGAEntry* buffer;
+static volatile VGAEntry* buffer = NULL;
 
 uint8_t vga_entry_color(VGA_COLOR fg, VGA_COLOR bg) {
     return fg | bg << 4;
@@ -37,6 +37,8 @@ void vga_clear(void) {
 }
 
 void vga_put_entry_at(char c, uint8_t col, size_t x, size_t y) {
+    if (buffer == NULL) return;
+
     assert(x <= VGA_WIDTH);
     assert(y <= VGA_HEIGHT);
 
