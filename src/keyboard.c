@@ -54,7 +54,7 @@ void keyboard_init()
     idt_set_descriptor(0x21, keyboard_stub, 0x8E);
 
     // Enable keyboard mask
-    uint8_t mask = inb(21);
+    uint8_t mask = inb(0x21);
     mask &= ~(1 << 1);
     outb(0x21, mask);
 }

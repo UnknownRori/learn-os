@@ -11,6 +11,10 @@ extern void timer_stub(void);
 void timer_init()
 {
     idt_set_descriptor(0x20, timer_stub, 0x8E);
+
+    // Enable timer interrupt
+    uint8_t mask = inb(0x21);
+    outb(0x21, mask & ~1);
 }
 
 

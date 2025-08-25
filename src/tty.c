@@ -21,7 +21,7 @@ inline static void clear_line()
 
 inline static void new_line() {
     x = 0;
-    for (uint8_t row = 1; row < VGA_HEIGHT; ++row) {
+    for (uint8_t row = 2; row < VGA_HEIGHT; ++row) {
         for (uint8_t col = 0; col < VGA_WIDTH; ++col) {
             buffer[row - 1][col] = buffer[row][col];
         }

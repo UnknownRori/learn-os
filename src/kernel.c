@@ -9,7 +9,8 @@
 #define RORI_LOG
 #include "include/log.h"
 
-void kmain(void) {
+void init()
+{
     serial_init();
     LOG("[+] Serial initialized");
 
@@ -26,7 +27,22 @@ void kmain(void) {
 
     LOG("[+] Booting");
 
-    LOG("[+] Loading Rori OS Project...");
+    tty_write("[+] Loading Rori OS Project");
+    serial_write("[+] Loading Rori OS Project");
+    for (int i = 0; i < 4;i ++) {
+        tty_write(".");
+        serial_write(".");
+        tty_flush();
+        sleep(100);
+    }
+
+    serial_write("\n------------------------\n");
+    tty_writeln("\n------------------------\n");
+}
+
+void kmain(void)
+{
+    init();
 
     tty_write("$ ");
     tty_flush();
