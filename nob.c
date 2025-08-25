@@ -15,6 +15,7 @@ const char* KERNEL_MODULE_ASM[] = {
 const char* KERNEL_MODULE_C[] = {
     "kernel",
     "vga",
+    "serial",
 };
 
 int build_bootloader();
@@ -96,7 +97,7 @@ int main(int argc, char** argv)
 
     cmd.count = 0;
     if (strcmp(run, "run") == 0) {
-        nob_cmd_append(&cmd, "qemu-system-i386", "-cdrom", iso);
+        nob_cmd_append(&cmd, "qemu-system-i386", "-cdrom", iso, "-serial", "stdio");
         if (!nob_cmd_run(&cmd)) return 1;
     }
     return 0;
