@@ -1,5 +1,6 @@
 #include "include/common.h"
 #include "include/idt.h"
+#include "include/keyboard.h"
 #include "include/serial.h"
 #include "include/timer.h"
 #include "include/tty.h"
@@ -13,6 +14,7 @@ void kmain(void) {
     LOG("[+] Serial initialized");
 
     idt_init();
+    keyboard_init();
     LOG("[+] Setup interrupts");
 
     vga_init();
@@ -24,10 +26,18 @@ void kmain(void) {
 
     LOG("[+] Booting");
 
-    sleep(1000);
-
     LOG("[+] Loading Rori OS Project...");
 
+    tty_write("$ ");
+    tty_flush();
+    while (1) {
+        char c = getch();
+        tty_putchar(c);
+        if (c == '\n') {
+            tty_write("$ ");
+        }
+        tty_flush();
+    }
 
     HALT;
 }
