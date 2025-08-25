@@ -32,8 +32,11 @@ void serial_putchar(char c) {
 
 void serial_write(const char* s) {
     while (*s) {
-        if (*s == '\n') serial_putchar('\r'); // CRLF
         serial_putchar(*s++);
     }
 }
 
+void serial_writeln(const char* s) {
+    serial_write(s);
+    serial_putchar('\n');
+}

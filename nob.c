@@ -16,6 +16,8 @@ const char* KERNEL_MODULE_C[] = {
     "kernel",
     "vga",
     "serial",
+    "tty",
+    "memory",
 };
 
 int build_bootloader();

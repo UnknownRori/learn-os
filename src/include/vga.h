@@ -28,6 +28,14 @@ typedef enum {
     VGA_WHITE = 15,
 } VGA_COLOR;
 
+typedef struct {
+    uint8_t ch;
+    uint8_t color;
+} __attribute__((packed)) VGAEntry;
+
+uint8_t vga_entry_color(VGA_COLOR fg, VGA_COLOR bg);
+void vga_mem_set(VGAEntry* src);
+
 void vga_init(void);
 void vga_clear(void);
 void vga_put_entry_at(char c, uint8_t color, size_t x, size_t y);

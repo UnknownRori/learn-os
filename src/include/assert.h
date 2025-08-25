@@ -6,15 +6,20 @@
 #include "vga.h"
 #include "common.h"
 
-#define ERR_MSG  "Assertion Failed at [" __FILE__ ":" TOSTRING(__LINE__) "]"
+#ifndef ASSERT_LOG
+    #include "serial.h"
+    #define ASSERT_LOG serial_write
+#endif
+
+#define ERR_MSG  "[-] Assert Failed at [" __FILE__ ":" TOSTRING(__LINE__) "]: "
 
 #define assert(EXPR)    \
     do {                \
         if (!(EXPR)) {    \
-            vga_put_str(ERR_MSG #EXPR, vga_entry_color(VGA_WHITE, VGA_RED), 0, 0); \
+            ASSERT_LOG(ERR_MSG #EXPR "\n"); \
             HALT;       \
         }               \
-    } while (0);        \
+    } while (0);        
 
 
 #endif

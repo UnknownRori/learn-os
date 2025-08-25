@@ -17,5 +17,6 @@ uint8_t inb(uint16_t port);
 void serial_init();
 void serial_putchar(char c);
 void serial_write(const char* s);
+void serial_writeln(const char* s);
 
 #endif
