@@ -40,9 +40,21 @@ void init()
     tty_writeln("\n------------------------\n");
 }
 
+void draw_header(const char* title)
+{
+    // TODO: Dynamically set the text position
+    for (int i = 0; i < VGA_WIDTH; i++) {
+        vga_put_entry_at(' ', vga_entry_color(VGA_WHITE, VGA_BLUE), i, 0);
+    }
+    vga_put_str(title, vga_entry_color(VGA_WHITE, VGA_BLUE), 30, 0);
+
+}
+
 void kmain(void)
 {
     init();
+
+    draw_header("UnknownRori's OS");
 
     tty_write("$ ");
     tty_flush();

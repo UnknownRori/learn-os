@@ -34,12 +34,13 @@ typedef struct {
 } __attribute__((packed)) VGAEntry;
 
 uint8_t vga_entry_color(VGA_COLOR fg, VGA_COLOR bg);
-void vga_mem_set(VGAEntry* src);
+void vga_mem_set(VGAEntry* src, uint8_t height);
 
 void vga_init(void);
 void vga_clear(void);
 void vga_put_entry_at(char c, uint8_t color, size_t x, size_t y);
 void vga_put_str(const char* str, uint8_t color, size_t x, size_t y);
 void vga_setcolor(uint8_t color);
+void vga_set_cursor(uint16_t row, uint16_t col);
 
 #endif

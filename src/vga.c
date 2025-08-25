@@ -1,4 +1,5 @@
 #include "include/vga.h"
+#include <stdint.h>
 #include <string.h>
 #include "include/assert.h"
 
@@ -12,16 +13,31 @@ uint8_t vga_entry_color(VGA_COLOR fg, VGA_COLOR bg) {
 static inline uint16_t vga_entry(unsigned char c, uint8_t color) {
     return (uint16_t)c | (uint16_t)color << 8;
 }
+void vga_set_cursor(uint16_t row, uint16_t col) {
+    uint16_t pos = row * VGA_WIDTH + col;
 
-void vga_mem_set(VGAEntry* src)
+    outb(0x3D4, 0x0F);
+    outb(0x3D5, (uint8_t)(pos & 0xFF));
+    outb(0x3D4, 0x0E);
+    outb(0x3D5, (uint8_t)((pos >> 8) & 0xFF));
+}
+
+void vga_mem_set(VGAEntry* src, uint8_t height)
 {
-    buffer[0] = src[0];
-    memcpy((void*)buffer, src, VGA_WIDTH * VGA_HEIGHT * sizeof(VGAEntry));
+    memcpy((void*)(buffer + (VGA_WIDTH * height)), src + height * VGA_WIDTH, VGA_WIDTH * (VGA_HEIGHT - height) * sizeof(VGAEntry));
 }
 
 void vga_init(void) {
     color = vga_entry_color(VGA_LIGHT_GREY, VGA_BLACK);
     buffer = (VGAEntry*)0xB8000;
+
+    outb(0x3D4, 0x0A);
+    outb(0x3D5, (inb(0x3D5) & 0xC0) | 0);
+
+    outb(0x3D4, 0x0B);
+    outb(0x3D5, (inb(0x3D5) & 0xE0) | 15);
+    vga_set_cursor(0, 0);
+
     vga_clear();
 }
 

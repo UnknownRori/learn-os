@@ -38,7 +38,7 @@ void tty_init()
 
 void tty_flush()
 {
-    vga_mem_set((VGAEntry*)buffer);
+    vga_mem_set((VGAEntry*)buffer, 1);
 }
 
 void tty_set_color(VGA_COLOR fg2, VGA_COLOR bg2)
@@ -73,6 +73,7 @@ void tty_putchar(char c)
             new_line();
         }
     }
+    vga_set_cursor(VGA_HEIGHT - 1, x);
 }
 void tty_write(const char* str)
 {
