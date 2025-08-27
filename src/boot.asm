@@ -10,10 +10,19 @@ section '.text' align 4
 extrn kmain
 
 start:
+    ; Arguments from GRUB
+    ; EAX = multiboot magic
+    ; EBX = pointer to multiboot_info struct
+
+    ; Since GRUB handle our bootloader we can focus on preparing calling our 
+    ; Kernel code in C since C uses stack we need to set it up first
+    ; And GRUB already set up 32-bit protected mode so the stack is on
+    ; ESP register
     mov esp, stack_top
 
     call kmain
 
+    ; Hang the entire kernel with infinte loop
     jmp $
 
 section '.bss' align 16

@@ -25,13 +25,26 @@ void vga_set_cursor(uint16_t row, uint16_t col) {
 
 void vga_mem_set(VGAEntry* src, uint8_t height)
 {
-    memcpy((void*)(buffer + (VGA_WIDTH * height)), src + height * VGA_WIDTH, VGA_WIDTH * (VGA_HEIGHT - height) * sizeof(VGAEntry));
+    assert(src != NULL);
+
+    memcpy(
+        (void*)(buffer + (VGA_WIDTH * height)), 
+        src + height * VGA_WIDTH, 
+        VGA_WIDTH * (VGA_HEIGHT - height) * sizeof(VGAEntry)
+    );
 }
 
+/// Setup VGA  default configuration with 80×25 text
+/// 0x3D4   -> VGA CRT Index Controller Port
+/// 0x3D5   -> VGA CRT Data Controller Port
+/// 0xB8000 -> VGA Buffer that store text along it's color
+///
+/// @returns void
 void vga_init(void) {
     color = vga_entry_color(VGA_LIGHT_GREY, VGA_BLACK);
     buffer = (VGAEntry*)0xB8000;
 
+    // Setup the cursor shape
     outb(0x3D4, 0x0A);
     outb(0x3D5, (inb(0x3D5) & 0xC0) | 0);
 

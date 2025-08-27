@@ -4,13 +4,15 @@
 #define RORI_LOG
 #include "include/log.h"
 
+#define IRQ_0 0x20
+
 static volatile unsigned long ticks = 0;
 
 extern void timer_stub(void);
 
 void timer_init()
 {
-    idt_set_descriptor(0x20, timer_stub, 0x8E);
+    idt_set_descriptor(IRQ_0, timer_stub, 0x8E);
 
     // Enable timer interrupt
     uint8_t mask = inb(0x21);
