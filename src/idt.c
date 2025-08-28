@@ -18,16 +18,10 @@ extern void exception_stub(void);
 
 void exception_handler(void);
 
-static inline uint16_t read_cs(void) {
-    uint16_t sel;
-    asm volatile ("mov %%cs, %0" : "=r"(sel));
-    return sel;
-}
-
 void idt_set_descriptor(uint8_t vector, void* isr, uint8_t flags) {
     uint32_t addr = (uint32_t)isr;
     idt[vector].isr_low   = addr & 0xFFFF;
-    idt[vector].kernel_cs = read_cs();
+    idt[vector].kernel_cs = 0x08;
     idt[vector].reserved  = 0;
     idt[vector].attributes = flags;
     idt[vector].isr_high  = (addr >> 16) & 0xFFFF;

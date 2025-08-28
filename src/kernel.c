@@ -5,6 +5,7 @@
 #include "include/timer.h"
 #include "include/tty.h"
 #include "include/vga.h"
+#include "include/gdt.h"
 
 #define RORI_LOG
 #include "include/log.h"
@@ -14,6 +15,7 @@ void init()
     serial_init();
     LOG("[+] Serial initialized");
 
+    gdt_init();
     idt_init();
     keyboard_init();
     LOG("[+] Setup interrupts");

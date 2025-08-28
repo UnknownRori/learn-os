@@ -13,6 +13,7 @@ const char* KERNEL_MODULE_ASM[] = {
     "stub_exception",
     "stub_timer",
     "stub_keyboard",
+    "stub_gdt",
 };
 
 const char* KERNEL_MODULE_C[] = {
@@ -23,7 +24,8 @@ const char* KERNEL_MODULE_C[] = {
     "memory",
     "idt",
     "timer",
-    "keyboard"
+    "keyboard",
+    "gdt",
 };
 
 int build_bootloader();
