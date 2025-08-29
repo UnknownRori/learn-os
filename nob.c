@@ -26,6 +26,7 @@ const char* KERNEL_MODULE_C[] = {
     "timer",
     "keyboard",
     "gdt",
+    "io",
 };
 
 int build_bootloader();

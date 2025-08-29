@@ -1,6 +1,7 @@
 #include <stdint.h>
 
 #include "include/vga.h"
+#include "include/io.h"
 #include "include/assert.h"
 #include "include/memory.h"
 

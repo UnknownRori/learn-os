@@ -1,5 +1,6 @@
 #include "include/timer.h"
 #include "include/idt.h"
+#include "include/io.h"
 
 #define RORI_LOG
 #include "include/log.h"

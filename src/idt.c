@@ -2,7 +2,7 @@
 
 #include "include/idt.h"
 #include "include/common.h"
-#include "include/serial.h"
+#include "include/io.h"
 #include "include/timer.h"
 
 #define RORI_LOG

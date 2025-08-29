@@ -1,6 +1,5 @@
 /// SERIAL.h - v0.0
-/// This file handle raw I/O communication between host with a port connected into
-/// It exposes assembly instruction to send and receive from I/O Port
+/// This file handle serial connection in the I/O port
 ///
 /// # I/O Port:
 /// - 0x3F8 -> COM 1 (QEMU)
@@ -12,7 +11,6 @@
 ///
 /// # References
 /// - https://wiki.osdev.org/Serial_Ports
-/// - https://wiki.osdev.org/Inline_Assembly
 
 #pragma once
 
@@ -23,18 +21,6 @@
 
 /// QEMU is in COM1
 #define COM1 0x3F8
-
-/// This function send out byte to I/O port
-/// @params uint16_t    port
-/// @params uint8_t     val
-/// @returns void
-void outb(uint16_t port, uint8_t val);
-
-/// This function receive byte from I/O port
-/// @params uint16_t    port
-/// @params uint8_t     val
-/// @returns uint8_t
-uint8_t inb(uint16_t port);
 
 /// -----------------------------------
 /// QEMU-Related
