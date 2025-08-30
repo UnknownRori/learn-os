@@ -2,10 +2,23 @@ use32
 format elf
 public start
 
+FLAGS = (0x03 or (1 shl 2))
+
 section '.multiboot' align 4
-    dd 0x1BADB002             ; magic number
-    dd 0x00                   ; flags
-    dd -(0x1BADB002 + 0x00)   ; checksum
+    dd 0x1BADB002               ; magic number
+    dd FLAGS                    ; flags
+    dd -(0x1BADB002 + FLAGS)    ; checksum
+
+    dd 0                        ; header_addr (unused)
+    dd 0                        ; load_addr (unused)
+    dd 0                        ; load_end_addr (unused)
+    dd 0                        ; bss_end_addr (unused)
+    dd 0                        ; entry_addr (unused)
+
+    dd 0                        ; Mode Type
+    dd 1366                     ; Width
+    dd 768                      ; Height
+    dd 32                       ; Depth
 
 section '.text' align 4
 extrn kmain

@@ -15,12 +15,17 @@ const char* KERNEL_MODULE_ASM[] = {
 const char* KERNEL_DIRECTORY[] = {
     "arch",
     "arch/i386",
+    "driver",
+    "driver/fb",
 };
 
 const char* KERNEL_MODULE_C[] = {
     "kernel",
+    "driver/fb/fb",
+    "arch/i386/cpu",
     "arch/i386/io",
     "arch/i386/serial",
+    "arch/i386/memory",
 };
 
 int build_bootloader();
