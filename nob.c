@@ -10,23 +10,17 @@
 
 const char* KERNEL_MODULE_ASM[] = {
     "boot",
-    "stub_exception",
-    "stub_timer",
-    "stub_keyboard",
-    "stub_gdt",
+};
+
+const char* KERNEL_DIRECTORY[] = {
+    "arch",
+    "arch/x86",
 };
 
 const char* KERNEL_MODULE_C[] = {
     "kernel",
-    "vga",
-    "serial",
-    "tty",
-    "memory",
-    "idt",
-    "timer",
-    "keyboard",
-    "gdt",
-    "io",
+    "arch/x86/io",
+    "arch/x86/serial",
 };
 
 int build_bootloader();
@@ -49,6 +43,12 @@ int main(int argc, char** argv)
     Nob_Cmd cmd = {0};
 
     const char* elf = nob_temp_sprintf("%s/kernel.elf", BUILD_DIR);
+
+    // Create directory
+    for (size_t i = 0; i < NOB_ARRAY_LEN(KERNEL_DIRECTORY); i++) {
+        const char* dir = nob_temp_sprintf("%s/%s", BUILD_DIR, KERNEL_DIRECTORY[i]);
+        nob_mkdir_if_not_exists(dir);
+    }
 
     // Build ASM code
     for (size_t i = 0; i < NOB_ARRAY_LEN(KERNEL_MODULE_ASM); i++) {

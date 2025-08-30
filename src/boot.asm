@@ -1,3 +1,4 @@
+use32
 format elf
 public start
 
@@ -20,6 +21,8 @@ start:
     ; ESP register
     mov esp, stack_top
 
+    push eax
+    push ebx
     call kmain
 
     ; Hang the entire kernel with infinte loop
