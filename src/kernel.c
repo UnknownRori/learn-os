@@ -1,8 +1,8 @@
 #include "include/types.h"
+#include "include/grub.h"
 #include "include/serial.h"
-void kmain(void** headers, uint32_t magic) 
+void kmain(multiboot_info_t* mb_info, uint32_t magic) 
 {
-    (void) headers;
     if (magic != 0x2BADB002) {
         asm volatile("hlt");
     }

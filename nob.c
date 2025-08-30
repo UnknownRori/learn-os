@@ -14,13 +14,13 @@ const char* KERNEL_MODULE_ASM[] = {
 
 const char* KERNEL_DIRECTORY[] = {
     "arch",
-    "arch/x86",
+    "arch/i386",
 };
 
 const char* KERNEL_MODULE_C[] = {
     "kernel",
-    "arch/x86/io",
-    "arch/x86/serial",
+    "arch/i386/io",
+    "arch/i386/serial",
 };
 
 int build_bootloader();
@@ -73,7 +73,17 @@ int main(int argc, char** argv)
         const char* dst_obj = nob_temp_sprintf("%s/%s.o", BUILD_DIR, KERNEL_MODULE_C[i]);
         nob_da_append(&objs, dst_obj);
         if (nob_needs_rebuild(dst_obj, &src, 1)) {
-            nob_cmd_append(&cmd, "gcc", "-m32", "-ffreestanding", "-c", src);
+            nob_cmd_append(&cmd, 
+                "gcc", 
+                "-m32", 
+                "-ffreestanding", 
+                "-fno-stack-protector", 
+                "-fno-pie", 
+                "-fno-pic", 
+                "-fno-builtin", 
+                "-c", 
+                src
+            );
             nob_cmd_append(&cmd, "-Wextra", "-Wall");
             nob_cmd_append(&cmd, "-o", dst_obj);
             if (!nob_cmd_run(&cmd, .async = &procs, .max_procs = 4)) return 1;
