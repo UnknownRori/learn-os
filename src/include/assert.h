@@ -3,8 +3,8 @@
 #ifndef RORI_OS_ASSERT_H
 #define RORI_OS_ASSERT_H
 
-#include "vga.h"
 #include "common.h"
+#include "cpu.h"
 
 #ifndef ASSERT_LOG
     #include "serial.h"
@@ -15,9 +15,9 @@
 
 #define assert(EXPR)    \
     do {                \
-        if (!(EXPR)) {    \
+        if (!(EXPR)) {  \
             ASSERT_LOG(ERR_MSG #EXPR "\n"); \
-            HALT;       \
+            halt();     \
         }               \
     } while (0);        
 

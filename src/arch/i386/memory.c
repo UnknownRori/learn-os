@@ -1,7 +1,5 @@
-#include <stdint.h>
-
-#include "include/memory.h"
-#include "include/assert.h"
+#include "../../include/memory.h"
+#include "../../include/assert.h"
 
 void memset(void *ptr, uint8_t val, size_t size) {
     assert(ptr != NULL);

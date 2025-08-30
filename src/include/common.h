@@ -6,9 +6,4 @@
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
 
-#define HALT do {   \
-    for(;;) {}      \
-    asm volatile("hlt");\
-} while(0)          \
-
 #endif
