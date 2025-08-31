@@ -11,8 +11,8 @@ it might not efficient, atleast it work.
 
 - [X] Serial Debugging
 - [X] PIT timer
-- [X] PS/2 Keyboard input
-- [ ] 320x200 linear 256-color mode
+- [ ] PS/2 Keyboard input
+- [X] 320x200 linear 256-color mode
 - [ ] VGA terminal
 - [ ] Paging: allocating pages and mapping them to virtual addresses
 - [ ] TTY
