@@ -6,4 +6,7 @@
 // This function will halt any current excecution
 void halt();
 
+void interrupt_enable();
+void interrupt_disable();
+
 #endif

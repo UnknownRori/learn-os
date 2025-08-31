@@ -35,6 +35,7 @@ const char* KERNEL_MODULE_C[] = {
     "arch/i386/memory",
     "arch/i386/gdt",
     "arch/i386/idt",
+    "arch/i386/exception",
     "arch/i386/timer",
     "arch/i386/interrupt",
 };

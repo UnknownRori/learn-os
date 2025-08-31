@@ -1,4 +1,5 @@
 #include "include/interrupt.h"
+#include "include/timer.h"
 #include "include/types.h"
 #include "include/grub.h"
 #include "include/serial.h"
@@ -13,6 +14,7 @@ void kmain(multiboot_info_t* mb_info, uint32_t magic)
     serial_init();
     interrupt_init();
     serial_writeln("Hello, world!");
+    sleep(1000);
     serial_writeln("From Kernel");
 
     framebuffer_t fb = {
@@ -50,7 +52,7 @@ void kmain(multiboot_info_t* mb_info, uint32_t magic)
         }
 
         // TODO : Implement PIT Timer for this
-        for (volatile int i = 0; i < 200000; i++);
+        sleep(1000);
     }
 
     asm volatile("hlt");
