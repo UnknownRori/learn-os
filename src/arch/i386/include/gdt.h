@@ -1,3 +1,13 @@
+/// GDT.h - v0.0
+/// This file handle Global Descriptor Table.
+///
+/// # Status:
+/// - 
+///
+/// # References:
+/// - https://wiki.osdev.org/Global_Descriptor_Table
+/// - https://wiki.osdev.org/GDT_Tutorial
+
 #pragma once
 
 #ifndef RORI_GDT_H
