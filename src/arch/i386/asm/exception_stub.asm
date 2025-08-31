@@ -9,7 +9,10 @@ extrn exception_handler
 macro ISR_STUB num {
 isr_stub_#num:
     cli
+    pusha
+    push num
     call exception_handler
+    popa
     sti
     iret
 }
