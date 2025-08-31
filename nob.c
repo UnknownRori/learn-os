@@ -10,22 +10,29 @@
 
 const char* KERNEL_MODULE_ASM[] = {
     "boot",
+
+    "arch/i386/asm/gdt_stub",
 };
 
 const char* KERNEL_DIRECTORY[] = {
     "arch",
     "arch/i386",
+    "arch/i386/asm",
     "driver",
     "driver/fb",
 };
 
 const char* KERNEL_MODULE_C[] = {
     "kernel",
+
     "driver/fb/fb",
+
     "arch/i386/cpu",
     "arch/i386/io",
     "arch/i386/serial",
     "arch/i386/memory",
+    "arch/i386/gdt",
+    "arch/i386/interrupt",
 };
 
 int build_bootloader();

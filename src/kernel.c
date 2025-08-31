@@ -1,3 +1,4 @@
+#include "include/interrupt.h"
 #include "include/types.h"
 #include "include/grub.h"
 #include "include/serial.h"
@@ -10,6 +11,7 @@ void kmain(multiboot_info_t* mb_info, uint32_t magic)
     }
 
     serial_init();
+    interrupt_init();
     serial_writeln("Hello, world!");
     serial_writeln("From Kernel");
 
