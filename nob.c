@@ -12,6 +12,8 @@ const char* KERNEL_MODULE_ASM[] = {
     "boot",
 
     "arch/i386/asm/gdt_stub",
+    "arch/i386/asm/exception_stub",
+    "arch/i386/asm/timer_stub",
 };
 
 const char* KERNEL_DIRECTORY[] = {
@@ -32,6 +34,8 @@ const char* KERNEL_MODULE_C[] = {
     "arch/i386/serial",
     "arch/i386/memory",
     "arch/i386/gdt",
+    "arch/i386/idt",
+    "arch/i386/timer",
     "arch/i386/interrupt",
 };
 
