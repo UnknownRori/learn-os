@@ -10,7 +10,7 @@ it might not efficient, atleast it work.
 ## Feature / Roadmap
 
 - [X] Serial Debugging
-- [ ] PIT timer
+- [X] PIT timer
 - [ ] PS/2 Keyboard input
 - [X] 320x200 linear 256-color mode
 - [ ] VGA terminal
