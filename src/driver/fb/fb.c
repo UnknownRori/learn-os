@@ -1,4 +1,5 @@
 #include "../../include/fb.h"
+#include "../../include/grub.h"
 #include "../../include/memory.h"
 #include "../../include/assert.h"
 
@@ -15,14 +16,21 @@ static void put_pixel(int x, int y, u32 color)
     backbuffer[y * fb.width + x] = color;
 }
 
-void fb_init(framebuffer_t fb_new)
+framebuffer_t* fb_init(multiboot_info_t* mb_info)
 {
-    fb = fb_new;
+    fb = (framebuffer_t){
+        .addr = (void*)mb_info->framebuffer_addr,
+        .pitch = mb_info->framebuffer_pitch,
+        .width = mb_info->framebuffer_width,
+        .height = mb_info->framebuffer_height,
+        .bpp = mb_info->framebuffer_bpp,
+    };
+    return &fb;
 }
 
 void fb_clear(u32 color)
 {
-    // memset(backbuffer, color, sizeof(backbuffer));
+    memset(backbuffer, color, sizeof(backbuffer));
 }
 
 void fb_draw_rect(int x, int y, int w, int h, u32 color)

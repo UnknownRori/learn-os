@@ -3,6 +3,7 @@
 #ifndef RORI_FB_H
 #define RORI_FB_H
 
+#include "grub.h"
 #include "types.h"
 
 typedef struct {
@@ -13,7 +14,7 @@ typedef struct {
     u8  bpp;
 } framebuffer_t;
 
-void fb_init(framebuffer_t fb_new);
+framebuffer_t* fb_init(multiboot_info_t* mb_info);
 void fb_commit();
 void fb_clear(u32 color);
 void fb_draw_rect(int x, int y, int w, int h, u32 color);

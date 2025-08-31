@@ -17,14 +17,7 @@ void kmain(multiboot_info_t* mb_info, uint32_t magic)
     sleep(1000);
     serial_writeln("From Kernel");
 
-    framebuffer_t fb = {
-        .addr = (void*)mb_info->framebuffer_addr,
-        .pitch = mb_info->framebuffer_pitch,
-        .width = mb_info->framebuffer_width,
-        .height = mb_info->framebuffer_height,
-        .bpp = mb_info->framebuffer_bpp,
-    };
-    fb_init(fb);
+    framebuffer_t* fb = fb_init(mb_info);
 
     u32 x = 0;
     u32 y = 0;
@@ -43,16 +36,15 @@ void kmain(multiboot_info_t* mb_info, uint32_t magic)
         x += xv;
         y += yv;
 
-        if (x + rect_w >= fb.width || x <= 0) {
+        if (x + rect_w >= fb->width || x <= 0) {
             xv = -xv;
         }
 
-        if (y + rect_h >= fb.height - 50 || y <= 0) {
+        if (y + rect_h >= fb->height || y <= 0) {
             yv = -yv;
         }
 
-        // TODO : Implement PIT Timer for this
-        sleep(1000);
+        sleep(16);
     }
 
     asm volatile("hlt");
