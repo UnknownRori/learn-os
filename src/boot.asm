@@ -16,8 +16,8 @@ section '.multiboot' align 4
     dd 0                        ; entry_addr (unused)
 
     dd 0                        ; Mode Type
-    dd 1366                     ; Width
-    dd 768                      ; Height
+    dd 800                      ; Width
+    dd 600                      ; Height
     dd 32                       ; Depth
 
 section '.text' align 4

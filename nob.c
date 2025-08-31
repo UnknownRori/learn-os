@@ -130,7 +130,7 @@ int main(int argc, char** argv)
 
     cmd.count = 0;
     if (strcmp(run, "run") == 0) {
-        nob_cmd_append(&cmd, "qemu-system-i386", "-cdrom", iso, "-serial", "stdio", "--no-reboot");
+        nob_cmd_append(&cmd, "qemu-system-i386", "-m", "512M", "-cdrom", iso, "-serial", "stdio", "--no-reboot");
         if (!nob_cmd_run(&cmd)) return 1;
     }
     return 0;
